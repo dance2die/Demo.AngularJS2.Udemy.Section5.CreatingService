@@ -7,7 +7,9 @@ import {LoggingService} from "./services/logging.service";
         <input type="text" #message>
         <button (click)="onLog(message.value)">Send</button>
 
-    `
+    `,
+    providers: [LoggingService]
+
 })
 export class Component2Component {
     constructor(private _loggingService: LoggingService){
