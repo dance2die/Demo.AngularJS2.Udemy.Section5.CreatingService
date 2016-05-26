@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {LoggingService} from "./services/logging.service";
 import {CalculatorService} from "./services/calculator.service";
+import {DataService} from "./services/data.service";
 
 @Component({
     selector: 'component-1',
@@ -19,16 +20,26 @@ import {CalculatorService} from "./services/calculator.service";
             <button (click)="onAdd(num1.value, num2.value)">Add</button>
             <br />
             <p>Result: {{result}}</p>
+            <input type="text" #newData>
+            <button (click)="onInsert(newData.value)">Insert new Data</button>
         </div>
+        <div>
+            <h1>Data Service</h1>
+            <button (click)="onGetData()">Get some data</button>
+            <p>Data: {{data}}</p>
+        </div>
+        
     `,
-    providers: [LoggingService, CalculatorService]
+    providers: [LoggingService, CalculatorService, DataService]
 })
 export class Component1Component {
     result: string;
+    data: string;
 
     constructor(
         private _loggingService: LoggingService,
-        private _calculatorService: CalculatorService){
+        private _calculatorService: CalculatorService,
+        private _dataService: DataService){
     }
 
     onLog(message: string){
@@ -41,5 +52,9 @@ export class Component1Component {
 
     onAdd(num1: number, num2: number){
         this.result = '' + this._calculatorService.add(+num1, +num2);
+    }
+
+    onGetData(){
+        this.data = this._dataService.getRandomString();
     }
 }
