@@ -20,13 +20,13 @@ import {DataService} from "./services/data.service";
             <button (click)="onAdd(num1.value, num2.value)">Add</button>
             <br />
             <p>Result: {{result}}</p>
-            <input type="text" #newData>
-            <button (click)="onInsert(newData.value)">Insert new Data</button>
         </div>
         <div>
             <h1>Data Service</h1>
             <button (click)="onGetData()">Get some data</button>
             <p>Data: {{data}}</p>
+            <input type="text" #newData>
+            <button (click)="onInsert(newData.value)">Insert new Data</button>
         </div>
         
     `,
@@ -56,5 +56,9 @@ export class Component1Component {
 
     onGetData(){
         this.data = this._dataService.getRandomString();
+    }
+
+    onInsert(value: string){
+        this._dataService.insert(value);
     }
 }
